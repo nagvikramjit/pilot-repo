@@ -11,7 +11,7 @@ pipeline {
         stage('Check files') {
             steps {
                 echo 'Checking files and folders'
-                ls -la
+                sh 'ls -la'
             }
         }
     }
