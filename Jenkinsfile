@@ -14,5 +14,12 @@ pipeline {
                 sh 'ls -la'
             }
         }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying'
+                sh 'pip3 install -r requirements.txt'
+                sh 'python3 main.py'
+            }
+        }
     }
 }
