@@ -2,14 +2,16 @@ pipeline {
     agent any
 
     stages {
-        stage('Hello') {
+        stage('Source code') {
             steps {
-                echo 'Hello World'
+                echo 'Cloning the project'
+                git branch: 'main', credentialsId: 'VikGitHub', url: 'https://github.com/nagvikramjit/pilot-repo'
             }
         }
-        stage('Bye') {
+        stage('Check files') {
             steps {
-                echo 'Bye World'
+                echo 'Checking files and folders'
+                ls -la
             }
         }
     }
