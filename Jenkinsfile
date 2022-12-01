@@ -17,8 +17,12 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying'
-                sh 'pip3 install -r requirements.txt'
-                sh 'python3 main.py'
+//                 sh 'pip3 install -r requirements.txt'
+//                 sh 'python3 main.py'
+                withCredentials([sshUserPrivateKey(credentialsId: 'london-keypair-ssh', keyFileVariable: 'keyfile', usernameVariable: 'user-name')]) {
+                    // some block
+                    sh 'ssh -i ${keyfile} ${user-name}@18.133.225.230 ls -la'
+                }
             }
         }
     }
