@@ -21,7 +21,7 @@ pipeline {
 //                 sh 'python3 main.py'
                 withCredentials([sshUserPrivateKey(credentialsId: 'london-keypair-ssh', keyFileVariable: 'keyfile', usernameVariable: 'user-name')]) {
                     // some block
-                    sh 'ssh -i ${keyfile} ${user-name}@18.133.225.230 ls -la'
+                    sh "ssh -i ${keyfile} ${user-name}@18.133.225.230 ls -la"
                 }
             }
         }
