@@ -21,7 +21,7 @@ pipeline {
                 sh 'cp main.py appfiles/'
                 sh 'cp requirements.txt appfiles/' 
                 sh 'cp runapp.sh appfiles/'
-                sh 'ls appfiles/
+                sh 'ls appfiles/'
                 sh 'sudo apt-get install zip -y'
                 sh 'zip -r appfiles_${BUILD_NUMBER}.zip appfiles'
             }
