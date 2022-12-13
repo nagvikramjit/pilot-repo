@@ -19,9 +19,9 @@ pipeline {
                 echo 'Deploying'
 //                 sh 'pip3 install -r requirements.txt'
 //                 sh 'python3 main.py'
-                withCredentials([sshUserPrivateKey(credentialsId: 'london-keypair-ssh', keyFileVariable: 'keyfile', usernameVariable: 'user-name')]) {
-                    // some block
-                    sh "ssh -i ${keyfile} ${user-name}@18.133.225.230 ls -la"
+                
+                    sshPublisher(publishers: [sshPublisherDesc(configName: 'ubuntu@13.40.82.116', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 'ls -la > newfile.txt', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+                
                 }
             }
         }
