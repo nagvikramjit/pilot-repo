@@ -21,8 +21,7 @@ pipeline {
 //                 sh 'python3 main.py'
                 
                     sshPublisher(publishers: [sshPublisherDesc(configName: 'ubuntu@13.40.82.116', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 'ls -la > newfile.txt', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
-                
-                }
+
             }
         }
     }
