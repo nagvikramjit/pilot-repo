@@ -17,7 +17,7 @@ pipeline {
         stage('Zip app files') {
             steps {
                 echo 'zipping necessary files'
-                tar cvzf appfiles_${BUILD_NUMBER}.tar.gz "main.py" "requirements.txt" "runapp.sh"
+                sh 'tar cvzf appfiles_${BUILD_NUMBER}.tar.gz "main.py" "requirements.txt" "runapp.sh"'
                 sh 'ls'
             }
         }
