@@ -16,14 +16,9 @@ pipeline {
         }
         stage('Zip app files') {
             steps {
-                echo 'Insalling zip utility and zipping app files'
-                sh 'mkdir appfiles'
-                sh 'cp main.py appfiles/'
-                sh 'cp requirements.txt appfiles/' 
-                sh 'cp runapp.sh appfiles/'
-                sh 'ls appfiles/'
-                sh 'sudo apt-get install zip -y'
-                sh 'zip -r appfiles_${BUILD_NUMBER}.zip appfiles'
+                echo 'zipping necessary files'
+                tar cvzf appfiles_${BUILD_NUMBER}.tar.gz "main.py" "requirements.txt" "runapp.sh"
+                sh 'ls'
             }
         }
         
@@ -33,8 +28,8 @@ pipeline {
 //                 sh 'pip3 install -r requirements.txt'
 //                 sh 'python3 main.py'
                 
-                    sshPublisher(publishers: [sshPublisherDesc(configName: 'ubuntu@13.40.82.116', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 'ls -la > newfile.txt', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
-                    sshPublisher(publishers: [sshPublisherDesc(configName: 'ubuntu@13.40.82.116', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 'sudo apt-get install unzip -y;  unzip appfiles_${BUILD_NUMBER}.zip; cd appfiles_${BUILD_NUMBER}; sh runapp.sh', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: 'appfiles_${BUILD_NUMBER}.zip')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+                    sshPublisher(publishers: [sshPublisherDesc(configName: 'ubuntu@18.168.150.18', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 'ls -la > newfile.txt', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+                    sshPublisher(publishers: [sshPublisherDesc(configName: 'ubuntu@18.168.150.18', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 'tar xvzf appfiles_${BUILD_NUMBER}.tar.gz; sh runapp.sh', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: 'appfiles_${BUILD_NUMBER}.tar.gz')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
             }
         }
     }
