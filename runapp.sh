@@ -4,4 +4,4 @@ if [ ! -z "$var" ]; then kill -9 ${var##p}; fi
 sudo apt-get update
 sudo apt-get install python3-pip -y
 pip3 install -r requirements.txt
-python3 main.py > app_log.txt &
+nohup python3 main.py > app_log.txt &
